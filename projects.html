@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Aleksandr</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .project-card {
+    display: grid; grid-template-columns: 300px 1fr;
+    gap: 2.5rem; padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .project-card:first-child { border-top: 1px solid var(--border); }
+
+  .project-thumb {
+    width: 100%; aspect-ratio: 16/10;
+    background: linear-gradient(145deg, var(--surface), var(--elevated));
+    border: 1px solid var(--border); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--dim);
+    font-family: var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  .project-info h3 {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .project-info .status {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+  }
+  .project-info p { color: var(--soft); font-size: 0.95rem; margin-bottom: 1rem; }
+  .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .project-tags span {
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--dim);
+    padding: 0.2rem 0.55rem; background: var(--elevated); border-radius: 4px;
+  }
+  .project-links a {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--dim);
+    margin-right: 1.5rem; border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .project-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 860px) {
+    .project-card { grid-template-columns: 1fr; }
+    .project-thumb { max-width: 300px; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="index.html" class="nav-name">Aleksandr</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="cv.html">CV</a>
+    <a href="blog.html">Notes</a>
+  </div>
+</div></nav>
+
+<div class="page-header">
+  <div class="sec-label">Projects</div>
+  <h1>Lab work & code</h1>
+  <div class="subtitle">Things I've built, measured, or am currently working on.</div>
+</div>
+
+<div class="section">
+
+  <div class="project-card reveal">
+    <div class="project-thumb">screenshot / diagram</div>
+    <div class="project-info">
+      <div class="status">In progress</div>
+      <h3>ENLighten: Neural Network Compression for Photonic Hardware</h3>
+      <p>Compressing trained neural networks to fit MZI mesh constraints — multi-epoch optimization, hardware-aware training, benchmarked on FashionMNIST, CIFAR-10, and ImageNet subsets. Runs on KAUST Ibex HPC cluster.</p>
+      <div class="project-tags"><span>Python</span><span>PyTorch</span><span>MZI</span><span>HPC</span></div>
+      <div class="project-links">
+        <a href="#">GitHub</a>
+        <a href="#">Paper (coming)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card reveal">
+    <div class="project-thumb">screenshot / diagram</div>
+    <div class="project-info">
+      <div class="status">In progress</div>
+      <h3>10×10 MZI Mesh Characterization</h3>
+      <p>Measuring insertion loss, channel crosstalk, and thermal phase shifter response across a Clements-architecture photonic chip. Includes Sagnac loop mirror design in Lumerical MODE.</p>
+      <div class="project-tags"><span>Lumerical</span><span>SOI</span><span>Experiment</span></div>
+      <div class="project-links">
+        <a href="#">Notes</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card reveal">
+    <div class="project-thumb">screenshot / diagram</div>
+    <div class="project-info">
+      <div class="status">Completed</div>
+      <h3>Surpassing the SQL via Variational Readout</h3>
+      <p>Theory and simulation for beating the Standard Quantum Limit in cavity optomechanical sensors using frequency-dependent squeezed light and variational homodyne measurement. Two first-author publications.</p>
+      <div class="project-tags"><span>Optomechanics</span><span>Squeezed light</span><span>JOSA B</span><span>Opt. Lett.</span></div>
+      <div class="project-links">
+        <a href="#">JOSA B paper</a>
+        <a href="#">Optics Letters paper</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-card reveal">
+    <div class="project-thumb">screenshot / diagram</div>
+    <div class="project-info">
+      <div class="status">Side project</div>
+      <h3>This Website</h3>
+      <p>Personal academic site with interactive wave-optics canvas background. Pure HTML/CSS/JS, no frameworks, hosted on GitHub Pages.</p>
+      <div class="project-tags"><span>HTML</span><span>Canvas</span><span>CSS</span></div>
+      <div class="project-links">
+        <a href="#">Source code</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
+<script src="main.js"></script>
+</body>
+</html>

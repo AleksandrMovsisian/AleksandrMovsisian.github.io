@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes — Aleksandr</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .post-list { display: flex; flex-direction: column; }
+
+  .post-item {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: padding-left 0.25s;
+    align-items: start;
+  }
+  .post-item:first-child { border-top: 1px solid var(--border); }
+  .post-item:hover { padding-left: 0.5rem; }
+
+  .post-date {
+    font-family: var(--mono); font-size: 0.75rem; color: var(--dim);
+    padding-top: 0.3rem;
+  }
+
+  .post-title {
+    font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
+    margin-bottom: 0.4rem; line-height: 1.3;
+    color: var(--text); transition: color 0.2s;
+  }
+  .post-item:hover .post-title { color: var(--accent); }
+
+  .post-excerpt { font-size: 0.9rem; color: var(--soft); margin-bottom: 0.5rem; }
+
+  .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .post-tags span {
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--dim);
+    padding: 0.2rem 0.55rem; background: var(--elevated); border-radius: 4px;
+  }
+
+  @media (max-width: 860px) {
+    .post-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="index.html" class="nav-name">Aleksandr</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+    <a href="blog.html" class="active">Notes</a>
+  </div>
+</div></nav>
+
+<div class="page-header">
+  <div class="sec-label">Notes & Blog</div>
+  <h1>Writing things down</h1>
+  <div class="subtitle">Technical notes, derivations, and occasional non-physics thoughts. Mostly for future-me, but you're welcome to read along.</div>
+</div>
+
+<div class="section">
+  <div class="post-list">
+
+    <a href="#" class="post-item reveal">
+      <div class="post-date">Mar 2025</div>
+      <div>
+        <div class="post-title">On exceptional points in coupled active resonators</div>
+        <div class="post-excerpt">Working through the CMT derivation for EP conditions in gain-loss coupled systems. Notes on why the round-trip phase matters more than you'd think.</div>
+        <div class="post-tags"><span>Non-Hermitian</span><span>CMT</span><span>Derivation</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="post-item reveal">
+      <div class="post-date">Nov 2024</div>
+      <div>
+        <div class="post-title">Quantum noise and the Standard Quantum Limit — a refresher</div>
+        <div class="post-excerpt">A self-contained walk through shot noise, radiation pressure noise, and the SQL. Written after explaining it for the third time to someone new in the lab.</div>
+        <div class="post-tags"><span>Quantum noise</span><span>SQL</span><span>Tutorial</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="post-item reveal">
+      <div class="post-date">Sep 2024</div>
+      <div>
+        <div class="post-title">Photonic chip calibration: things nobody tells you</div>
+        <div class="post-excerpt">Practical notes from characterizing a 10×10 MZI mesh. Fiber alignment, thermal drift, and why you should always measure your reference channel first.</div>
+        <div class="post-tags"><span>Experiment</span><span>MZI</span><span>Practical</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="post-item reveal">
+      <div class="post-date">Jun 2024</div>
+      <div>
+        <div class="post-title">Your next post title here</div>
+        <div class="post-excerpt">Brief description of the topic. Each post is a separate HTML file — just copy the template and write.</div>
+        <div class="post-tags"><span>Topic</span></div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Aleksandr</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .cv-download {
+    margin-bottom: 3rem;
+  }
+  .cv-block { margin-bottom: 3.5rem; }
+  .cv-block-title {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .cv-entry {
+    display: grid; grid-template-columns: 140px 1fr;
+    gap: 2rem; padding: 0.8rem 0;
+  }
+  .cv-date {
+    font-family: var(--mono); font-size: 0.78rem; color: var(--dim);
+    padding-top: 0.15rem; text-align: right;
+  }
+  .cv-content h4 { font-weight: 500; font-size: 0.98rem; margin-bottom: 0.15rem; }
+  .cv-content p { font-size: 0.88rem; color: var(--soft); margin-bottom: 0; }
+  .cv-content .detail { font-size: 0.82rem; color: var(--dim); margin-top: 0.1rem; }
+
+  @media (max-width: 860px) {
+    .cv-entry { grid-template-columns: 1fr; gap: 0.25rem; }
+    .cv-date { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="index.html" class="nav-name">Aleksandr</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html" class="active">CV</a>
+    <a href="blog.html">Notes</a>
+  </div>
+</div></nav>
+
+<div class="page-header">
+  <div class="sec-label">Curriculum Vitae</div>
+  <h1>Background & experience</h1>
+  <div class="subtitle">The formal version. For the human version, see <a href="index.html#about" style="color:var(--accent);">About</a>.</div>
+</div>
+
+<div class="section">
+
+  <div class="cv-download reveal">
+    <a href="#" class="btn">Download full CV (PDF) ↓</a>
+  </div>
+
+  <div class="cv-block reveal">
+    <div class="cv-block-title">Education</div>
+    <div class="cv-entry">
+      <div class="cv-date">2023 – present</div>
+      <div class="cv-content">
+        <h4>PhD Candidate · KAUST</h4>
+        <p>Integrated Photonics Lab · Prof. Yating Wan</p>
+        <div class="detail">LNOI photonics, MZI mesh characterization, optical neural networks, exceptional-point physics</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-date">20XX – 20XX</div>
+      <div class="cv-content">
+        <h4>MSc · Moscow State University</h4>
+        <p>Physics · Vyatchanin group</p>
+        <div class="detail">Quantum measurement theory, precision optomechanics</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-block reveal">
+    <div class="cv-block-title">Research Experience</div>
+    <div class="cv-entry">
+      <div class="cv-date">2021 – 2022</div>
+      <div class="cv-content">
+        <h4>Research Fellow · EPFL</h4>
+        <p>Laboratory of Photonics and Quantum Measurements (K-Lab) · Prof. T. Kippenberg</p>
+        <div class="detail">Cavity optomechanics, squeezed-light injection, variational readout schemes</div>
+      </div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-date">20XX</div>
+      <div class="cv-content">
+        <h4>Research Intern · Russian Quantum Center</h4>
+        <p>Details here</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-block reveal">
+    <div class="cv-block-title">Publications</div>
+    <div class="cv-entry">
+      <div class="cv-date">2 first-author</div>
+      <div class="cv-content">
+        <p>JOSA B, Optics Letters — surpassing the Standard Quantum Limit via variational readout and squeezed light. <a href="publications.html" style="color:var(--accent);">Full list →</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-block reveal">
+    <div class="cv-block-title">Awards & Fellowships</div>
+    <div class="cv-entry">
+      <div class="cv-date">20XX</div>
+      <div class="cv-content">
+        <h4>EPFL Fellowship</h4>
+        <p>Competitive research fellowship for international students</p>
+      </div>
+    </div>
+    <!-- Add more -->
+  </div>
+
+  <div class="cv-block reveal">
+    <div class="cv-block-title">Service</div>
+    <div class="cv-entry">
+      <div class="cv-date">20XX</div>
+      <div class="cv-content">
+        <h4>Ad Hoc Reviewer — JOSA B</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-block reveal">
+    <div class="cv-block-title">Skills & Tools</div>
+    <div class="cv-entry">
+      <div class="cv-date">Languages</div>
+      <div class="cv-content"><p>Python, MATLAB, LaTeX, HTML/CSS/JS</p></div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-date">Tools</div>
+      <div class="cv-content"><p>Lumerical MODE/FDE, COMSOL, PyTorch, Git, Linux/HPC (Ibex)</p></div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-date">Languages</div>
+      <div class="cv-content"><p>Russian (native), English (fluent)</p></div>
+    </div>
+  </div>
+
+</div>
+
+<footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
+<script src="main.js"></script>
+</body>
+</html>

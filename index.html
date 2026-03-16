@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aleksandr — Photonics & Quantum Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1c1b22;
+    --surface: #24232b;
+    --elevated: #2c2b34;
+    --text: #e0ddd6;
+    --soft: #b5b0a6;
+    --dim: #837e74;
+    --accent: #8bb8cc;
+    --accent2: #cc9b8b;
+    --warm: #d4c9b8;
+    --highlight: #e8c87a;
+    --border: #35343d;
+    --border-light: #3e3d47;
+    --serif: 'Fraunces', Georgia, serif;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Outfit', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.75; font-weight: 300; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(28,27,34,0.75); backdrop-filter: blur(20px) saturate(1.3); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  nav .inner { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; height: 58px; display: flex; justify-content: space-between; align-items: center; }
+  .nav-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-family: var(--sans); font-size: 0.82rem; color: var(--soft); font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 7rem 2.5rem 4rem; overflow: hidden; }
+  #bgCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+  .hero-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 35%; background: linear-gradient(to bottom, transparent, var(--bg)); z-index: 1; }
+  .hero-inner { position: relative; z-index: 2; max-width: 1140px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; align-items: center; }
+  .hero-text .greeting { font-size: 1rem; color: var(--dim); font-weight: 300; margin-bottom: 0.75rem; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
+  .hero-text h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.25rem; opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards; }
+  .hero-text h1 .hl { color: var(--accent); font-style: italic; font-weight: 400; }
+  .hero-text .tagline { font-size: 1.1rem; color: var(--soft); font-weight: 300; max-width: 480px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; }
+  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards; }
+  .btn { font-family: var(--sans); font-size: 0.82rem; font-weight: 400; padding: 0.6rem 1.4rem; border: 1px solid var(--border); border-radius: 8px; transition: all 0.25s; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.filled { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 500; }
+  .btn.filled:hover { background: var(--accent); border-color: var(--accent); }
+  .hero-photo { width: 280px; height: 340px; border-radius: 16px; background: linear-gradient(145deg, var(--surface), var(--elevated)); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; color: var(--dim); opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; position: relative; overflow: hidden; }
+  .hero-photo::after { content: ''; position: absolute; inset: 0; border-radius: 16px; background: linear-gradient(135deg, rgba(139,184,204,0.08), transparent 60%, rgba(204,155,139,0.08)); }
+
+  /* SECTIONS */
+  .section { max-width: 1140px; margin: 0 auto; padding: 6rem 2.5rem; }
+  .sec-label { font-family: var(--mono); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .sec-title { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+  .sec-sub { font-size: 1rem; color: var(--dim); font-weight: 300; margin-bottom: 3rem; }
+  .divider { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; }
+  .divider .line { height: 1px; background: var(--border); }
+
+  /* ABOUT */
+  .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .about-content p { color: var(--soft); font-size: 1.02rem; margin-bottom: 1.25rem; }
+  .about-content p strong { color: var(--text); font-weight: 500; }
+  .journey { display: flex; flex-direction: column; margin-top: 1rem; }
+  .journey-step { display: grid; grid-template-columns: 100px 12px 1fr; gap: 1rem; padding: 0.75rem 0; align-items: start; }
+  .journey-step .year { font-family: var(--mono); font-size: 0.75rem; color: var(--dim); text-align: right; padding-top: 0.2rem; }
+  .journey-step .dot-line { display: flex; flex-direction: column; align-items: center; padding-top: 0.35rem; }
+  .journey-step .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-light); border: 2px solid var(--bg); flex-shrink: 0; }
+  .journey-step:first-child .dot { background: var(--accent); }
+  .journey-step .stem { width: 1px; flex: 1; background: var(--border); margin-top: 4px; }
+  .journey-step:last-child .stem { display: none; }
+  .journey-step .place { font-weight: 500; font-size: 0.92rem; }
+  .journey-step .desc { font-size: 0.82rem; color: var(--dim); margin-top: 0.15rem; }
+
+  /* RESEARCH */
+  .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .r-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: all 0.3s; }
+  .r-card:hover { border-color: var(--border-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+  .r-card .r-icon { font-family: var(--serif); font-size: 1.8rem; font-weight: 800; color: var(--border-light); margin-bottom: 1rem; transition: color 0.3s; }
+  .r-card:hover .r-icon { color: var(--accent); }
+  .r-card h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .r-card p { color: var(--soft); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .r-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .r-tags span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); padding: 0.2rem 0.55rem; background: var(--elevated); border-radius: 4px; }
+
+  /* LATEST */
+  .latest-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+  .l-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.3s; }
+  .l-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+  .l-card .l-type { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.75rem; }
+  .l-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.3; }
+  .l-card p { font-size: 0.85rem; color: var(--dim); margin-bottom: 0; }
+
+  /* CONFERENCES */
+  .conf-list { display: flex; flex-direction: column; }
+  .conf-item { display: grid; grid-template-columns: 110px 1fr auto; gap: 2rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); align-items: baseline; transition: padding-left 0.25s; }
+  .conf-item:first-child { border-top: 1px solid var(--border); }
+  .conf-item:hover { padding-left: 0.5rem; }
+  .conf-item .c-date { font-family: var(--mono); font-size: 0.75rem; color: var(--dim); }
+  .conf-item .c-name { font-weight: 500; font-size: 0.95rem; }
+  .conf-item .c-role { font-size: 0.82rem; color: var(--soft); margin-top: 0.15rem; }
+  .conf-item .c-loc { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); white-space: nowrap; }
+
+  /* INTERESTS */
+  .interests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .int-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.3s; }
+  .int-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+  .int-card .emoji { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
+  .int-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .int-card p { font-size: 0.85rem; color: var(--soft); margin-bottom: 0; }
+
+  /* PAGES */
+  .pages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .pg { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .pg:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .pg .pg-label { font-family: var(--serif); font-size: 1.6rem; font-weight: 800; color: var(--border-light); transition: color 0.3s; }
+  .pg:hover .pg-label { color: var(--accent); }
+  .pg .pg-name { font-weight: 500; font-size: 0.9rem; }
+  .pg .pg-desc { font-size: 0.78rem; color: var(--dim); }
+
+  /* CONTACT */
+  .contact-section { text-align: center; max-width: 600px; margin: 0 auto; }
+  .contact-section h2 { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; margin-bottom: 1rem; }
+  .contact-section h2 em { font-weight: 300; color: var(--soft); }
+  .contact-section p { color: var(--soft); margin-bottom: 2rem; }
+  .contact-row { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .contact-row a { font-size: 0.88rem; color: var(--soft); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: all 0.25s; }
+  .contact-row a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  footer { max-width: 1140px; margin: 0 auto; padding: 2.5rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--dim); border-top: 1px solid var(--border); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.vis { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 860px) {
+    nav .inner { padding: 0 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-photo { width: 200px; height: 240px; }
+    .section { padding: 4rem 1.5rem; }
+    .about-content, .research-grid { grid-template-columns: 1fr; }
+    .latest-row, .interests-grid { grid-template-columns: 1fr; }
+    .conf-item { grid-template-columns: 1fr; gap: 0.25rem; }
+    .pages { grid-template-columns: 1fr 1fr; }
+    .divider { padding: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="#" class="nav-name">Aleksandr</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#conferences">Conferences</a>
+    <a href="publications.html">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="blog.html">Notes</a>
+    <a href="#interests">Life</a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="bgCanvas"></canvas>
+  <div class="hero-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="greeting">Hey, I'm</p>
+      <h1>Aleksandr<br><span class="hl">Lastname</span></h1>
+      <p class="tagline">PhD researcher working at the intersection of photonics, quantum technologies, and machine learning. I like building things with light.</p>
+      <div class="hero-btns">
+        <a href="#about" class="btn filled">More about me</a>
+        <a href="publications.html" class="btn">Publications</a>
+        <a href="#" class="btn">CV ↓</a>
+      </div>
+    </div>
+    <div class="hero-photo">your photo</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="sec-label reveal">About</div>
+  <div class="sec-title reveal">A bit about me</div>
+  <div class="sec-sub reveal">The short version — and where I've been so far</div>
+  <div class="about-content">
+    <div class="reveal">
+      <p><strong>I'm a physicist who got hooked on photonics</strong> — specifically on what happens when you push optical measurements to their quantum limits. My journey started with theoretical quantum noise at MSU, then took me through precision optomechanics at EPFL, and now to building photonic neural networks at KAUST.</p>
+      <p>I care about understanding things deeply before building them. Most of my work sits at the boundary between theory and experiment — deriving what should happen, then figuring out how to make it happen on a chip.</p>
+      <p>Outside the lab, I read a lot, try to stay active, and occasionally write about things I find interesting. I believe good science comes from curious people who have lives beyond their papers.</p>
+    </div>
+    <div class="reveal">
+      <div class="journey">
+        <div class="journey-step">
+          <div class="year">2023 – now</div>
+          <div class="dot-line"><div class="dot"></div><div class="stem"></div></div>
+          <div><div class="place">KAUST · Integrated Photonics Lab</div><div class="desc">PhD candidate · Prof. Yating Wan</div></div>
+        </div>
+        <div class="journey-step">
+          <div class="year">2021 – 2022</div>
+          <div class="dot-line"><div class="dot"></div><div class="stem"></div></div>
+          <div><div class="place">EPFL · Kippenberg Lab</div><div class="desc">Cavity optomechanics · Squeezed light · EPFL Fellowship</div></div>
+        </div>
+        <div class="journey-step">
+          <div class="year">20XX</div>
+          <div class="dot-line"><div class="dot"></div><div class="stem"></div></div>
+          <div><div class="place">Russian Quantum Center</div><div class="desc">Research internship</div></div>
+        </div>
+        <div class="journey-step">
+          <div class="year">20XX – 20XX</div>
+          <div class="dot-line"><div class="dot"></div></div>
+          <div><div class="place">MSU · Physics</div><div class="desc">Quantum measurement theory · Prof. Vyatchanin</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="sec-label reveal">Research</div>
+  <div class="sec-title reveal">What I think about</div>
+  <div class="sec-sub reveal">The questions that keep me going</div>
+  <div class="research-grid">
+    <div class="r-card reveal">
+      <div class="r-icon">I</div>
+      <h3>Quantum Noise & Optomechanics</h3>
+      <p>Can we measure displacement beyond the Standard Quantum Limit? Squeezed-light injection, back-action evasion, and what it takes to get there.</p>
+      <div class="r-tags"><span>SQL</span><span>Squeezed states</span><span>BAE</span></div>
+    </div>
+    <div class="r-card reveal">
+      <div class="r-icon">II</div>
+      <h3>Integrated Photonics</h3>
+      <p>Designing circuits on chip — LNOI waveguides, add-drop resonators, MZI meshes. Making light do useful things in small spaces.</p>
+      <div class="r-tags"><span>LNOI</span><span>MZI</span><span>CMT</span></div>
+    </div>
+    <div class="r-card reveal">
+      <div class="r-icon">III</div>
+      <h3>Photonic Neural Networks</h3>
+      <p>Running inference in light — Clements architecture, thermal phase shifters, neural network compression for optical hardware.</p>
+      <div class="r-tags"><span>ONN</span><span>ENLighten</span><span>Hardware demo</span></div>
+    </div>
+    <div class="r-card reveal">
+      <div class="r-icon">IV</div>
+      <h3>Nonlinear Optics</h3>
+      <p>Exceptional points in coupled resonators, non-Hermitian physics, nonlinear eigenproblems. Where does the math break and why does it matter?</p>
+      <div class="r-tags"><span>EP</span><span>Non-Hermitian</span><span>Parametric</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- LATEST -->
+<section class="section">
+  <div class="sec-label reveal">Latest</div>
+  <div class="sec-title reveal">Recent work</div>
+  <div class="sec-sub reveal">Papers, notes, and things in progress</div>
+  <div class="latest-row">
+    <div class="l-card reveal"><div class="l-type">Paper</div><h3>Title of your first paper</h3><p>Journal · 2025</p></div>
+    <div class="l-card reveal"><div class="l-type">Paper</div><h3>Title of your second paper</h3><p>Journal · 2024</p></div>
+    <div class="l-card reveal"><div class="l-type">Note</div><h3>Exceptional points in coupled active resonators</h3><p>Blog · 2025</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- CONFERENCES -->
+<section class="section" id="conferences">
+  <div class="sec-label reveal">Conferences</div>
+  <div class="sec-title reveal">Talks & meetings</div>
+  <div class="sec-sub reveal">Places where ideas get sharper</div>
+  <div class="conf-list">
+    <div class="conf-item reveal"><div class="c-date">Mar 2025</div><div><div class="c-name">Conference Name</div><div class="c-role">Poster / Talk — "Your title here"</div></div><div class="c-loc">City, Country</div></div>
+    <div class="conf-item reveal"><div class="c-date">Oct 2024</div><div><div class="c-name">Another Conference</div><div class="c-role">Contributed talk — "Topic"</div></div><div class="c-loc">City, Country</div></div>
+    <div class="conf-item reveal"><div class="c-date">Jun 2024</div><div><div class="c-name">Summer School or Workshop</div><div class="c-role">Participant</div></div><div class="c-loc">City, Country</div></div>
+    <div class="conf-item reveal"><div class="c-date">2022</div><div><div class="c-name">EPFL-era conference</div><div class="c-role">Poster — "Squeezed light in optomechanical systems"</div></div><div class="c-loc">Switzerland</div></div>
+  </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- INTERESTS -->
+<section class="section" id="interests">
+  <div class="sec-label reveal">Beyond the lab</div>
+  <div class="sec-title reveal">Things I enjoy</div>
+  <div class="sec-sub reveal">Because life is more than papers</div>
+  <div class="interests-grid">
+    <div class="int-card reveal"><span class="emoji">📚</span><h3>Reading</h3><p>Productivity, philosophy, fiction — from Atomic Habits and Antifragile to Jack London. Always have something on the nightstand.</p></div>
+    <div class="int-card reveal"><span class="emoji">🏃</span><h3>Staying active</h3><p>Your sport or activity here — whatever keeps you sane between long lab sessions.</p></div>
+    <div class="int-card reveal"><span class="emoji">✍️</span><h3>Writing & notes</h3><p>I like writing technical notes for myself — it's how I learn. Some of them end up on the blog.</p></div>
+    <div class="int-card reveal"><span class="emoji">🌍</span><h3>Languages & travel</h3><p>Fluent in Russian & English. Have lived in Russia, Switzerland, Saudi Arabia. Each place taught me something different.</p></div>
+    <div class="int-card reveal"><span class="emoji">💡</span><h3>Personal development</h3><p>Thinking Fast and Slow, Antifragile, habit systems — I'm interested in how people get better at things.</p></div>
+    <div class="int-card reveal"><span class="emoji">🔧</span><h3>Your interest here</h3><p>Add whatever else — cooking, music, photography, hiking, chess... whatever is you.</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- EXPLORE PAGES -->
+<section class="section">
+  <div class="sec-label reveal">Explore</div>
+  <div class="sec-title reveal">Dive deeper</div>
+  <div class="sec-sub reveal">Separate pages for the heavy stuff</div>
+  <div class="pages">
+    <a href="publications.html" class="pg reveal"><div class="pg-label">Pb</div><div class="pg-name">Publications</div><div class="pg-desc">Full list & preprints</div></a>
+    <a href="projects.html" class="pg reveal"><div class="pg-label">Pr</div><div class="pg-name">Projects</div><div class="pg-desc">Lab & code</div></a>
+    <a href="cv.html" class="pg reveal"><div class="pg-label">CV</div><div class="pg-name">Curriculum Vitae</div><div class="pg-desc">Full academic CV</div></a>
+    <a href="blog.html" class="pg reveal"><div class="pg-label">Nt</div><div class="pg-name">Notes</div><div class="pg-desc">Technical writing</div></a>
+  </div>
+</section>
+
+<div class="divider"><div class="line"></div></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-section reveal">
+    <h2>Want to <em>chat?</em></h2>
+    <p>Always happy to talk about physics, potential collaborations, or just interesting ideas. Drop me a line.</p>
+    <div class="contact-row">
+      <a href="/cdn-cgi/l/email-protection#30495f45421e555d51595c705b514543441e5554451e4351">Email</a>
+      <a href="#">Google Scholar</a>
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
+
+<!-- BACKGROUND CANVAS -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(() => {
+  const cv = document.getElementById('bgCanvas');
+  const c = cv.getContext('2d');
+  let W, H, t = 0, mx = 0.5, my = 0.5;
+  const S = 5;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  document.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+
+  const srcs = [
+    { x: 0.2, y: 0.3, f: 0.028, a: 1.0, p: 0 },
+    { x: 0.8, y: 0.25, f: 0.032, a: 0.7, p: 2.1 },
+    { x: 0.5, y: 0.75, f: 0.024, a: 0.85, p: 4.2 },
+    { x: 0.35, y: 0.6, f: 0.036, a: 0.5, p: 1.4 },
+  ];
+
+  function frame() {
+    t += 0.008;
+    srcs[2].x += (mx - srcs[2].x) * 0.008;
+    srcs[2].y += (my - srcs[2].y) * 0.008;
+    srcs[0].x = 0.2 + Math.sin(t * 0.4) * 0.08;
+    srcs[0].y = 0.3 + Math.cos(t * 0.3) * 0.06;
+
+    const cols = Math.ceil(W / S), rows = Math.ceil(H / S);
+    const img = c.createImageData(cols, rows);
+    const d = img.data;
+
+    for (let r = 0; r < rows; r++) {
+      for (let cl = 0; cl < cols; cl++) {
+        const px = (cl * S + S/2) / W, py = (r * S + S/2) / H;
+        let v = 0;
+        for (let i = 0; i < srcs.length; i++) {
+          const s = srcs[i];
+          const dx = (px - s.x) * (W/H), dy = py - s.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          v += Math.sin(dist * s.f * W - t*2.5 + s.p) * s.a / (1 + dist*2.5);
+        }
+        v = Math.max(0, Math.min(1, (v + 1.5) / 3.0));
+        const idx = (r * cols + cl) * 4;
+        if (v > 0.58) {
+          const p = (v - 0.58) / 0.42;
+          d[idx] = Math.floor(50 + p*88); d[idx+1] = Math.floor(52 + p*80);
+          d[idx+2] = Math.floor(60 + p*72); d[idx+3] = Math.floor(30 + p*65);
+        } else if (v > 0.42) {
+          const p = (v - 0.42) / 0.16;
+          d[idx] = Math.floor(30 + p*8); d[idx+1] = Math.floor(28 + p*10);
+          d[idx+2] = Math.floor(36 + p*12); d[idx+3] = Math.floor(15 + p*15);
+        } else {
+          const p = v / 0.42;
+          d[idx] = Math.floor(20 + p*12); d[idx+1] = Math.floor(18 + p*10);
+          d[idx+2] = Math.floor(28 + p*10); d[idx+3] = Math.floor(8 + p*12);
+        }
+      }
+    }
+
+    const off = document.createElement('canvas');
+    off.width = cols; off.height = rows;
+    off.getContext('2d').putImageData(img, 0, 0);
+    c.clearRect(0, 0, W, H);
+    c.imageSmoothingEnabled = true;
+    c.imageSmoothingQuality = 'high';
+    c.drawImage(off, 0, 0, W, H);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — Aleksandr</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Publications-specific styles */
+  .pub-filters {
+    display: flex; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+  }
+  .pub-filters button {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 400;
+    padding: 0.4rem 1rem; border: 1px solid var(--border);
+    border-radius: 6px; background: transparent; color: var(--soft);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .pub-filters button:hover,
+  .pub-filters button.active {
+    border-color: var(--accent); color: var(--accent); background: rgba(139,184,204,0.06);
+  }
+
+  .pub-year-group { margin-bottom: 3rem; }
+  .pub-year-label {
+    font-family: var(--serif); font-size: 1.8rem; font-weight: 700;
+    color: var(--border-light); margin-bottom: 1rem;
+  }
+
+  .pub-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: padding-left 0.2s;
+  }
+  .pub-item:first-child { border-top: 1px solid var(--border); }
+  .pub-item:hover { padding-left: 0.5rem; }
+
+  .pub-title {
+    font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 0.25rem; line-height: 1.35;
+  }
+  .pub-authors { font-size: 0.88rem; color: var(--soft); margin-bottom: 0.2rem; }
+  .pub-authors strong { color: var(--text); font-weight: 500; }
+  .pub-venue {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .pub-links {
+    margin-top: 0.5rem; display: flex; gap: 1rem;
+  }
+  .pub-links a {
+    font-family: var(--mono); font-size: 0.68rem;
+    letter-spacing: 0.04em; color: var(--dim);
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+  .pub-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav><div class="inner">
+  <a href="index.html" class="nav-name">Aleksandr</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="index.html#research">Research</a>
+    <a href="publications.html" class="active">Publications</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+    <a href="blog.html">Notes</a>
+  </div>
+</div></nav>
+
+<div class="page-header">
+  <div class="sec-label">Publications</div>
+  <h1>Papers & preprints</h1>
+  <div class="subtitle">Full list of publications. * denotes equal contribution.</div>
+</div>
+
+<div class="section">
+  <div class="pub-filters">
+    <button class="active">All</button>
+    <button>First author</button>
+    <button>Journal</button>
+    <button>Conference</button>
+  </div>
+
+  <!-- 2025 -->
+  <div class="pub-year-group reveal">
+    <div class="pub-year-label">2025</div>
+    <div class="pub-item">
+      <div class="pub-title">Your paper title goes here</div>
+      <div class="pub-authors"><strong>A. Lastname</strong>, B. Coauthor, C. Coauthor, D. Advisor</div>
+      <div class="pub-venue">JOSA B · Vol. XX · pp. XXX–XXX (2025)</div>
+      <div class="pub-links">
+        <a href="#">Paper</a>
+        <a href="#">Preprint</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="pub-year-group reveal">
+    <div class="pub-year-label">2024</div>
+    <div class="pub-item">
+      <div class="pub-title">Another paper title</div>
+      <div class="pub-authors"><strong>A. Lastname</strong>, E. Coauthor, F. Coauthor</div>
+      <div class="pub-venue">Optics Letters · Vol. XX · pp. XXX (2024)</div>
+      <div class="pub-links">
+        <a href="#">Paper</a>
+        <a href="#">Preprint</a>
+        <a href="#">Code</a>
+      </div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-title">Conference proceeding title</div>
+      <div class="pub-authors">G. Coauthor, <strong>A. Lastname</strong>, H. Coauthor</div>
+      <div class="pub-venue">CLEO 2024</div>
+      <div class="pub-links">
+        <a href="#">Abstract</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add more years as needed -->
+</div>
+
+<footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
+<script src="main.js"></script>
+</body>
+</html>
