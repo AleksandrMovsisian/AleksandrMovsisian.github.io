@@ -330,7 +330,7 @@
     <h2>Want to <em>chat?</em></h2>
     <p>Always happy to talk about physics, potential collaborations, or just interesting ideas. Drop me a line.</p>
     <div class="contact-row">
-      <a href="/cdn-cgi/l/email-protection#30495f45421e555d51595c705b514543441e5554451e4351">Email</a>
+      <a href="mailto:your.email@kaust.edu.sa">Email</a>
       <a href="#">Google Scholar</a>
       <a href="#">GitHub</a>
       <a href="#">LinkedIn</a>
@@ -341,7 +341,7 @@
 <footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
 
 <!-- BACKGROUND CANVAS -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (() => {
   const cv = document.getElementById('bgCanvas');
   const c = cv.getContext('2d');
@@ -419,3 +419,9 @@
 
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
