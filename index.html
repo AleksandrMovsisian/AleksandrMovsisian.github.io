@@ -3,133 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aleksandr — Photonics & Quantum Technologies</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300;1,9..144,400;1,9..144,700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<title>Aleksandr Movsisian — Photonics & Quantum Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,300;1,8..60,400;1,8..60,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #1c1b22;
-    --surface: #24232b;
-    --elevated: #2c2b34;
-    --text: #e0ddd6;
-    --soft: #b5b0a6;
-    --dim: #837e74;
-    --accent: #8bb8cc;
-    --accent2: #cc9b8b;
-    --warm: #d4c9b8;
-    --highlight: #e8c87a;
-    --border: #35343d;
-    --border-light: #3e3d47;
-    --serif: 'Fraunces', Georgia, serif;
+    --bg: #eae7e2;
+    --surface: #f3f0ec;
+    --elevated: #e2dfda;
+    --text: #1e1c1a;
+    --soft: #585450;
+    --dim: #948e88;
+    --accent: #3a3530;
+    --accent2: #807a74;
+    --border: #d6d2cc;
+    --border-light: #c6c2bc;
+    --serif: 'Source Serif 4', Georgia, serif;
     --mono: 'JetBrains Mono', monospace;
-    --sans: 'Outfit', sans-serif;
+    --sans: 'DM Sans', sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.75; font-weight: 300; overflow-x: hidden; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 20px; line-height: 1.8; font-weight: 400; overflow-x: hidden; }
   a { color: inherit; text-decoration: none; }
-  ::selection { background: var(--accent); color: var(--bg); }
+  ::selection { background: var(--text); color: var(--bg); }
 
   /* NAV */
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(28,27,34,0.75); backdrop-filter: blur(20px) saturate(1.3); border-bottom: 1px solid rgba(255,255,255,0.04); }
-  nav .inner { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; height: 58px; display: flex; justify-content: space-between; align-items: center; }
-  .nav-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--text); }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a { font-family: var(--sans); font-size: 0.82rem; color: var(--soft); font-weight: 400; transition: color 0.2s; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background-color: #d5c4aa;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.14'/%3E%3C/svg%3E");
+    background-size: 800px 70px;
+    border-bottom: 1px solid #b8a890;
+  }
+  nav .inner { max-width: 1240px; margin: 0 auto; padding: 0 2.5rem; height: 78px; display: flex; justify-content: space-between; align-items: center; }
+  .nav-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--text); }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { font-family: var(--sans); font-size: 1.1rem; color: var(--soft); font-weight: 400; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
 
   /* HERO */
-  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 7rem 2.5rem 4rem; overflow: hidden; }
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 7rem 2.5rem 4rem; overflow: hidden; cursor: crosshair; }
   #bgCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-  .hero-fade { position: absolute; bottom: 0; left: 0; right: 0; height: 35%; background: linear-gradient(to bottom, transparent, var(--bg)); z-index: 1; }
-  .hero-inner { position: relative; z-index: 2; max-width: 1140px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; align-items: center; }
-  .hero-text .greeting { font-size: 1rem; color: var(--dim); font-weight: 300; margin-bottom: 0.75rem; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
-  .hero-text h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.25rem; opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards; }
-  .hero-text h1 .hl { color: var(--accent); font-style: italic; font-weight: 400; }
-  .hero-text .tagline { font-size: 1.1rem; color: var(--soft); font-weight: 300; max-width: 480px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; }
+  .hero-fade { display: none; }
+  .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: center; }
+  .hero-text .greeting { font-size: 1.3rem; color: var(--dim); font-weight: 300; margin-bottom: 0.75rem; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
+  .hero-text h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(3.6rem, 7.5vw, 5.5rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.25rem; opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards; }
+  .hero-text h1 .hl { color: var(--text); font-style: normal; font-weight: 400; }
+  .hero-text .tagline { font-size: 1.35rem; color: var(--soft); font-weight: 300; max-width: 720px; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; }
   .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.65s ease forwards; }
-  .btn { font-family: var(--sans); font-size: 0.82rem; font-weight: 400; padding: 0.6rem 1.4rem; border: 1px solid var(--border); border-radius: 8px; transition: all 0.25s; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .btn { font-family: var(--sans); font-size: 1.02rem; font-weight: 400; padding: 0.7rem 1.6rem; border: 1px solid var(--border); border-radius: 8px; transition: all 0.25s; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
   .btn:hover { border-color: var(--accent); color: var(--accent); }
   .btn.filled { background: var(--text); color: var(--bg); border-color: var(--text); font-weight: 500; }
   .btn.filled:hover { background: var(--accent); border-color: var(--accent); }
-  .hero-photo { width: 280px; height: 340px; border-radius: 16px; background: linear-gradient(145deg, var(--surface), var(--elevated)); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; color: var(--dim); opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; position: relative; overflow: hidden; }
+  .hero-photo { width: 320px; height: 390px; border-radius: 16px; background: linear-gradient(145deg, var(--surface), var(--elevated)); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; color: var(--dim); opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; position: relative; overflow: hidden; }
   .hero-photo::after { content: ''; position: absolute; inset: 0; border-radius: 16px; background: linear-gradient(135deg, rgba(139,184,204,0.08), transparent 60%, rgba(204,155,139,0.08)); }
 
   /* SECTIONS */
-  .section { max-width: 1140px; margin: 0 auto; padding: 6rem 2.5rem; }
-  .sec-label { font-family: var(--mono); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-  .sec-title { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
-  .sec-sub { font-size: 1rem; color: var(--dim); font-weight: 300; margin-bottom: 3rem; }
+  .section { max-width: 1240px; margin: 0 auto; padding: 6rem 2.5rem; }
+  .sec-label { font-family: var(--mono); font-size: 0.82rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .sec-title { font-family: var(--serif); font-size: 3.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+  .sec-sub { font-size: 1.2rem; color: var(--dim); font-weight: 300; margin-bottom: 3rem; }
+  /* ABOUT COMPACT */
+  .about-compact { max-width: 740px; }
+  .about-compact p { color: var(--soft); font-size: 1.2rem; margin-bottom: 1.2rem; line-height: 1.85; }
+  .path-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 2rem; }
+  .path-node { font-family: var(--mono); font-size: 0.95rem; color: var(--text); padding: 0.4rem 1rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .path-arrow { color: var(--dim); font-size: 1rem; }
+  .quick-links { display: flex; gap: 1.75rem; margin-top: 2rem; }
+  .quick-links a { font-size: 1.05rem; color: var(--accent); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .quick-links a:hover { border-bottom-color: var(--accent); }
+
   .divider { max-width: 1140px; margin: 0 auto; padding: 0 2.5rem; }
   .divider .line { height: 1px; background: var(--border); }
 
   /* ABOUT */
   .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .about-content p { color: var(--soft); font-size: 1.02rem; margin-bottom: 1.25rem; }
+  .about-content p { color: var(--soft); font-size: 1.1rem; margin-bottom: 1.25rem; }
   .about-content p strong { color: var(--text); font-weight: 500; }
   .journey { display: flex; flex-direction: column; margin-top: 1rem; }
   .journey-step { display: grid; grid-template-columns: 100px 12px 1fr; gap: 1rem; padding: 0.75rem 0; align-items: start; }
-  .journey-step .year { font-family: var(--mono); font-size: 0.75rem; color: var(--dim); text-align: right; padding-top: 0.2rem; }
+  .journey-step .year { font-family: var(--mono); font-size: 0.82rem; color: var(--dim); text-align: right; padding-top: 0.2rem; }
   .journey-step .dot-line { display: flex; flex-direction: column; align-items: center; padding-top: 0.35rem; }
   .journey-step .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-light); border: 2px solid var(--bg); flex-shrink: 0; }
   .journey-step:first-child .dot { background: var(--accent); }
   .journey-step .stem { width: 1px; flex: 1; background: var(--border); margin-top: 4px; }
   .journey-step:last-child .stem { display: none; }
-  .journey-step .place { font-weight: 500; font-size: 0.92rem; }
-  .journey-step .desc { font-size: 0.82rem; color: var(--dim); margin-top: 0.15rem; }
+  .journey-step .place { font-weight: 500; font-size: 1.02rem; }
+  .journey-step .desc { font-size: 0.9rem; color: var(--dim); margin-top: 0.15rem; }
 
   /* RESEARCH */
   .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  .r-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: all 0.3s; }
-  .r-card:hover { border-color: var(--border-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-  .r-card .r-icon { font-family: var(--serif); font-size: 1.8rem; font-weight: 800; color: var(--border-light); margin-bottom: 1rem; transition: color 0.3s; }
+  .r-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2.25rem; transition: all 0.3s; display: block; text-decoration: none; color: inherit; }
+  .r-card:hover { border-color: var(--border-light); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .r-card .r-icon { font-family: var(--serif); font-size: 2rem; font-weight: 800; color: var(--border-light); margin-bottom: 1rem; transition: color 0.3s; }
   .r-card:hover .r-icon { color: var(--accent); }
-  .r-card h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .r-card p { color: var(--soft); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .r-card h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; transition: color 0.3s; }
+  .r-card:hover h3 { color: var(--accent); }
+  .r-card p { color: var(--soft); font-size: 1.08rem; margin-bottom: 0.75rem; }
   .r-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .r-tags span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); padding: 0.2rem 0.55rem; background: var(--elevated); border-radius: 4px; }
+  .r-tags span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); padding: 0.28rem 0.65rem; background: var(--elevated); border-radius: 4px; }
 
   /* LATEST */
   .latest-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
   .l-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.3s; }
   .l-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
-  .l-card .l-type { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.75rem; }
-  .l-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.3; }
-  .l-card p { font-size: 0.85rem; color: var(--dim); margin-bottom: 0; }
+  .l-card .l-type { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.75rem; }
+  .l-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.3; }
+  .l-card p { font-size: 0.95rem; color: var(--dim); margin-bottom: 0; }
 
   /* CONFERENCES */
   .conf-list { display: flex; flex-direction: column; }
   .conf-item { display: grid; grid-template-columns: 110px 1fr auto; gap: 2rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); align-items: baseline; transition: padding-left 0.25s; }
   .conf-item:first-child { border-top: 1px solid var(--border); }
   .conf-item:hover { padding-left: 0.5rem; }
-  .conf-item .c-date { font-family: var(--mono); font-size: 0.75rem; color: var(--dim); }
-  .conf-item .c-name { font-weight: 500; font-size: 0.95rem; }
-  .conf-item .c-role { font-size: 0.82rem; color: var(--soft); margin-top: 0.15rem; }
-  .conf-item .c-loc { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); white-space: nowrap; }
+  .conf-item .c-date { font-family: var(--mono); font-size: 0.85rem; color: var(--dim); }
+  .conf-item .c-name { font-weight: 500; font-size: 1.05rem; }
+  .conf-item .c-role { font-size: 0.92rem; color: var(--soft); margin-top: 0.15rem; }
+  .conf-item .c-loc { font-family: var(--mono); font-size: 0.82rem; color: var(--dim); white-space: nowrap; }
 
   /* INTERESTS */
   .interests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .int-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.3s; }
   .int-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
   .int-card .emoji { font-size: 1.8rem; margin-bottom: 0.75rem; display: block; }
-  .int-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
-  .int-card p { font-size: 0.85rem; color: var(--soft); margin-bottom: 0; }
+  .int-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .int-card p { font-size: 0.95rem; color: var(--soft); margin-bottom: 0; }
 
   /* PAGES */
   .pages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
   .pg { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-  .pg:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .pg:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
   .pg .pg-label { font-family: var(--serif); font-size: 1.6rem; font-weight: 800; color: var(--border-light); transition: color 0.3s; }
   .pg:hover .pg-label { color: var(--accent); }
-  .pg .pg-name { font-weight: 500; font-size: 0.9rem; }
-  .pg .pg-desc { font-size: 0.78rem; color: var(--dim); }
+  .pg .pg-name { font-weight: 500; font-size: 1rem; }
+  .pg .pg-desc { font-size: 0.88rem; color: var(--dim); }
+
+  /* NOTES */
+  .notes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+  .note-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 0.3s; display: block; text-decoration: none; color: inherit; }
+  .note-card:hover { border-color: var(--border-light); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .note-card .note-date { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); margin-bottom: 0.75rem; }
+  .note-card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; transition: color 0.3s; }
+  .note-card:hover h3 { color: var(--accent); }
+  .note-card p { font-size: 1rem; color: var(--soft); margin-bottom: 0.75rem; }
+  .note-card .note-tag { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); padding: 0.25rem 0.6rem; background: var(--elevated); border-radius: 4px; display: inline-block; }
+  .social-row { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .social-row .social-label { font-family: var(--mono); font-size: 0.78rem; color: var(--dim); }
+  .social-row a { font-size: 1rem; color: var(--accent); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .social-row a:hover { border-bottom-color: var(--accent); }
 
   /* CONTACT */
   .contact-section { text-align: center; max-width: 600px; margin: 0 auto; }
-  .contact-section h2 { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; margin-bottom: 1rem; }
+  .contact-section h2 { font-family: var(--serif); font-size: 2.6rem; font-weight: 700; margin-bottom: 1rem; }
   .contact-section h2 em { font-weight: 300; color: var(--soft); }
-  .contact-section p { color: var(--soft); margin-bottom: 2rem; }
+  .contact-section p { color: var(--soft); margin-bottom: 2rem; font-size: 1.2rem; }
   .contact-row { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-  .contact-row a { font-size: 0.88rem; color: var(--soft); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: all 0.25s; }
+  .contact-row a { font-size: 1.1rem; color: var(--soft); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: all 0.25s; }
   .contact-row a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
   footer { max-width: 1140px; margin: 0 auto; padding: 2.5rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--dim); border-top: 1px solid var(--border); }
@@ -146,7 +175,7 @@
     .hero-photo { width: 200px; height: 240px; }
     .section { padding: 4rem 1.5rem; }
     .about-content, .research-grid { grid-template-columns: 1fr; }
-    .latest-row, .interests-grid { grid-template-columns: 1fr; }
+    .latest-row, .interests-grid, .notes-grid { grid-template-columns: 1fr; }
     .conf-item { grid-template-columns: 1fr; gap: 0.25rem; }
     .pages { grid-template-columns: 1fr 1fr; }
     .divider { padding: 0 1.5rem; }
@@ -157,180 +186,139 @@
 <body>
 
 <nav><div class="inner">
-  <a href="#" class="nav-name">Aleksandr</a>
+  <a href="#" class="nav-name">AM</a>
   <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#research">Research</a>
-    <a href="#conferences">Conferences</a>
+    <a href="about.html">About</a>
+    <a href="research.html">Research</a>
     <a href="publications.html">Publications</a>
     <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
     <a href="blog.html">Notes</a>
-    <a href="#interests">Life</a>
+    <a href="interests.html">Life</a>
   </div>
 </div></nav>
 
 <!-- HERO -->
 <section class="hero">
   <canvas id="bgCanvas"></canvas>
-  <div class="hero-fade"></div>
   <div class="hero-inner">
     <div class="hero-text">
       <p class="greeting">Hey, I'm</p>
-      <h1>Aleksandr<br><span class="hl">Lastname</span></h1>
-      <p class="tagline">PhD researcher working at the intersection of photonics, quantum technologies, and machine learning. I like building things with light.</p>
+      <h1>Aleksandr <span class="hl">Movsisian</span></h1>
+      <p class="tagline">Researcher interested in understanding how the world works at a fundamental level — and building things that wouldn't exist without that understanding.</p>
       <div class="hero-btns">
-        <a href="#about" class="btn filled">More about me</a>
+        <a href="about.html" class="btn filled">More about me</a>
         <a href="publications.html" class="btn">Publications</a>
         <a href="#" class="btn">CV ↓</a>
       </div>
     </div>
-    <div class="hero-photo">your photo</div>
+    <div class="hero-photo"><img src="photo.jpg" alt="Aleksandr Movsisian" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"></div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT (compact) -->
 <section class="section" id="about">
-  <div class="sec-label reveal">About</div>
-  <div class="sec-title reveal">A bit about me</div>
-  <div class="sec-sub reveal">The short version — and where I've been so far</div>
-  <div class="about-content">
-    <div class="reveal">
-      <p><strong>I'm a physicist who got hooked on photonics</strong> — specifically on what happens when you push optical measurements to their quantum limits. My journey started with theoretical quantum noise at MSU, then took me through precision optomechanics at EPFL, and now to building photonic neural networks at KAUST.</p>
-      <p>I care about understanding things deeply before building them. Most of my work sits at the boundary between theory and experiment — deriving what should happen, then figuring out how to make it happen on a chip.</p>
-      <p>Outside the lab, I read a lot, try to stay active, and occasionally write about things I find interesting. I believe good science comes from curious people who have lives beyond their papers.</p>
-    </div>
-    <div class="reveal">
-      <div class="journey">
-        <div class="journey-step">
-          <div class="year">2023 – now</div>
-          <div class="dot-line"><div class="dot"></div><div class="stem"></div></div>
-          <div><div class="place">KAUST · Integrated Photonics Lab</div><div class="desc">PhD candidate · Prof. Yating Wan</div></div>
-        </div>
-        <div class="journey-step">
-          <div class="year">2021 – 2022</div>
-          <div class="dot-line"><div class="dot"></div><div class="stem"></div></div>
-          <div><div class="place">EPFL · Kippenberg Lab</div><div class="desc">Cavity optomechanics · Squeezed light · EPFL Fellowship</div></div>
-        </div>
-        <div class="journey-step">
-          <div class="year">20XX</div>
-          <div class="dot-line"><div class="dot"></div><div class="stem"></div></div>
-          <div><div class="place">Russian Quantum Center</div><div class="desc">Research internship</div></div>
-        </div>
-        <div class="journey-step">
-          <div class="year">20XX – 20XX</div>
-          <div class="dot-line"><div class="dot"></div></div>
-          <div><div class="place">MSU · Physics</div><div class="desc">Quantum measurement theory · Prof. Vyatchanin</div></div>
-        </div>
-      </div>
-    </div>
+  <div class="about-compact reveal">
+    <p>I started with quantum measurement theory at Moscow State University, moved through cavity optomechanics and squeezed light at EPFL, and now work on photonic neural networks and integrated optics at KAUST. Most of what I do sits at the boundary between theory and experiment — figuring out what should happen, then making it happen on a chip.</p>
+    <p>Outside the lab, I read, run, write, and think about how people and systems get better over time.</p>
+  </div>
+  <div class="path-row reveal">
+    <span class="path-node">MSU</span>
+    <span class="path-arrow">→</span>
+    <span class="path-node">RQC</span>
+    <span class="path-arrow">→</span>
+    <span class="path-node">EPFL · Kippenberg Lab</span>
+    <span class="path-arrow">→</span>
+    <span class="path-node">KAUST · now</span>
+  </div>
+  <div class="quick-links reveal">
+    <a href="#">Google Scholar</a>
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="mailto:aleksandr.movsisian@gmail.com">Email</a>
   </div>
 </section>
 
 <div class="divider"><div class="line"></div></div>
 
-<!-- RESEARCH -->
-<section class="section" id="research">
-  <div class="sec-label reveal">Research</div>
+<!-- RESEARCH INTERESTS -->
+<section class="section">
+  <div class="sec-label reveal">Research interests</div>
   <div class="sec-title reveal">What I think about</div>
   <div class="sec-sub reveal">The questions that keep me going</div>
   <div class="research-grid">
-    <div class="r-card reveal">
+    <a href="research-quantum-noise.html" class="r-card reveal">
       <div class="r-icon">I</div>
       <h3>Quantum Noise & Optomechanics</h3>
       <p>Can we measure displacement beyond the Standard Quantum Limit? Squeezed-light injection, back-action evasion, and what it takes to get there.</p>
       <div class="r-tags"><span>SQL</span><span>Squeezed states</span><span>BAE</span></div>
-    </div>
-    <div class="r-card reveal">
+    </a>
+    <a href="research-photonics.html" class="r-card reveal">
       <div class="r-icon">II</div>
       <h3>Integrated Photonics</h3>
       <p>Designing circuits on chip — LNOI waveguides, add-drop resonators, MZI meshes. Making light do useful things in small spaces.</p>
       <div class="r-tags"><span>LNOI</span><span>MZI</span><span>CMT</span></div>
-    </div>
-    <div class="r-card reveal">
+    </a>
+    <a href="research-onn.html" class="r-card reveal">
       <div class="r-icon">III</div>
       <h3>Photonic Neural Networks</h3>
       <p>Running inference in light — Clements architecture, thermal phase shifters, neural network compression for optical hardware.</p>
       <div class="r-tags"><span>ONN</span><span>ENLighten</span><span>Hardware demo</span></div>
-    </div>
-    <div class="r-card reveal">
+    </a>
+    <a href="research-nonlinear.html" class="r-card reveal">
       <div class="r-icon">IV</div>
       <h3>Nonlinear Optics</h3>
       <p>Exceptional points in coupled resonators, non-Hermitian physics, nonlinear eigenproblems. Where does the math break and why does it matter?</p>
       <div class="r-tags"><span>EP</span><span>Non-Hermitian</span><span>Parametric</span></div>
-    </div>
+    </a>
   </div>
 </section>
 
 <div class="divider"><div class="line"></div></div>
 
-<!-- LATEST -->
+<!-- NOTES & WRITING -->
 <section class="section">
-  <div class="sec-label reveal">Latest</div>
-  <div class="sec-title reveal">Recent work</div>
-  <div class="sec-sub reveal">Papers, notes, and things in progress</div>
-  <div class="latest-row">
-    <div class="l-card reveal"><div class="l-type">Paper</div><h3>Title of your first paper</h3><p>Journal · 2025</p></div>
-    <div class="l-card reveal"><div class="l-type">Paper</div><h3>Title of your second paper</h3><p>Journal · 2024</p></div>
-    <div class="l-card reveal"><div class="l-type">Note</div><h3>Exceptional points in coupled active resonators</h3><p>Blog · 2025</p></div>
+  <div class="sec-label reveal">Notes & writing</div>
+  <div class="sec-title reveal">Things I think about</div>
+  <div class="sec-sub reveal"></div>
+  <div class="notes-grid">
+    <a href="#" class="note-card reveal">
+      <div class="note-date">Coming soon</div>
+      <h3>On building intuition in physics</h3>
+      <p>Why solving problems isn't the same as understanding them, and what I try to do differently.</p>
+      <div class="note-tag">Essay</div>
+    </a>
+    <a href="#" class="note-card reveal">
+      <div class="note-date">Coming soon</div>
+      <h3>Time tracking as self-knowledge</h3>
+      <p>What I learned from logging every hour for three months, inspired by Lyubishchev.</p>
+      <div class="note-tag">Personal</div>
+    </a>
+    <a href="#" class="note-card reveal">
+      <div class="note-date">Coming soon</div>
+      <h3>A beginner's map of photonic neural networks</h3>
+      <p>The landscape as I see it — what works, what doesn't, and where the field is headed.</p>
+      <div class="note-tag">Technical note</div>
+    </a>
   </div>
-</section>
-
-<div class="divider"><div class="line"></div></div>
-
-<!-- CONFERENCES -->
-<section class="section" id="conferences">
-  <div class="sec-label reveal">Conferences</div>
-  <div class="sec-title reveal">Talks & meetings</div>
-  <div class="sec-sub reveal">Places where ideas get sharper</div>
-  <div class="conf-list">
-    <div class="conf-item reveal"><div class="c-date">Mar 2025</div><div><div class="c-name">Conference Name</div><div class="c-role">Poster / Talk — "Your title here"</div></div><div class="c-loc">City, Country</div></div>
-    <div class="conf-item reveal"><div class="c-date">Oct 2024</div><div><div class="c-name">Another Conference</div><div class="c-role">Contributed talk — "Topic"</div></div><div class="c-loc">City, Country</div></div>
-    <div class="conf-item reveal"><div class="c-date">Jun 2024</div><div><div class="c-name">Summer School or Workshop</div><div class="c-role">Participant</div></div><div class="c-loc">City, Country</div></div>
-    <div class="conf-item reveal"><div class="c-date">2022</div><div><div class="c-name">EPFL-era conference</div><div class="c-role">Poster — "Squeezed light in optomechanical systems"</div></div><div class="c-loc">Switzerland</div></div>
-  </div>
-</section>
-
-<div class="divider"><div class="line"></div></div>
-
-<!-- INTERESTS -->
-<section class="section" id="interests">
-  <div class="sec-label reveal">Beyond the lab</div>
-  <div class="sec-title reveal">Things I enjoy</div>
-  <div class="sec-sub reveal">Because life is more than papers</div>
-  <div class="interests-grid">
-    <div class="int-card reveal"><span class="emoji">📚</span><h3>Reading</h3><p>Productivity, philosophy, fiction — from Atomic Habits and Antifragile to Jack London. Always have something on the nightstand.</p></div>
-    <div class="int-card reveal"><span class="emoji">🏃</span><h3>Staying active</h3><p>Your sport or activity here — whatever keeps you sane between long lab sessions.</p></div>
-    <div class="int-card reveal"><span class="emoji">✍️</span><h3>Writing & notes</h3><p>I like writing technical notes for myself — it's how I learn. Some of them end up on the blog.</p></div>
-    <div class="int-card reveal"><span class="emoji">🌍</span><h3>Languages & travel</h3><p>Fluent in Russian & English. Have lived in Russia, Switzerland, Saudi Arabia. Each place taught me something different.</p></div>
-    <div class="int-card reveal"><span class="emoji">💡</span><h3>Personal development</h3><p>Thinking Fast and Slow, Antifragile, habit systems — I'm interested in how people get better at things.</p></div>
-    <div class="int-card reveal"><span class="emoji">🔧</span><h3>Your interest here</h3><p>Add whatever else — cooking, music, photography, hiking, chess... whatever is you.</p></div>
-  </div>
-</section>
-
-<div class="divider"><div class="line"></div></div>
-
-<!-- EXPLORE PAGES -->
-<section class="section">
-  <div class="sec-label reveal">Explore</div>
-  <div class="sec-title reveal">Dive deeper</div>
-  <div class="sec-sub reveal">Separate pages for the heavy stuff</div>
-  <div class="pages">
-    <a href="publications.html" class="pg reveal"><div class="pg-label">Pb</div><div class="pg-name">Publications</div><div class="pg-desc">Full list & preprints</div></a>
-    <a href="projects.html" class="pg reveal"><div class="pg-label">Pr</div><div class="pg-name">Projects</div><div class="pg-desc">Lab & code</div></a>
-    <a href="cv.html" class="pg reveal"><div class="pg-label">CV</div><div class="pg-name">Curriculum Vitae</div><div class="pg-desc">Full academic CV</div></a>
-    <a href="blog.html" class="pg reveal"><div class="pg-label">Nt</div><div class="pg-name">Notes</div><div class="pg-desc">Technical writing</div></a>
+  <div class="social-row reveal">
+    <span class="social-label">Find me elsewhere:</span>
+    <a href="#">Twitter / X</a>
+    <a href="#">Telegram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">GitHub</a>
   </div>
 </section>
 
 <div class="divider"><div class="line"></div></div>
 
 <!-- CONTACT -->
-<section class="section" id="contact">
+<section class="section">
   <div class="contact-section reveal">
-    <h2>Want to <em>chat?</em></h2>
-    <p>Always happy to talk about physics, potential collaborations, or just interesting ideas. Drop me a line.</p>
+    <h2>Let's talk</h2>
+    <p>Always happy to discuss physics, collaborations, or interesting ideas.</p>
     <div class="contact-row">
-      <a href="mailto:your.email@kaust.edu.sa">Email</a>
+      <a href="mailto:aleksandr.movsisian@gmail.com">Email</a>
       <a href="#">Google Scholar</a>
       <a href="#">GitHub</a>
       <a href="#">LinkedIn</a>
@@ -338,85 +326,209 @@
   </div>
 </section>
 
-<footer><span>© 2025 Aleksandr Lastname</span><span>Built with curiosity & HTML</span></footer>
+<footer><span>© 2025 Aleksandr Movsisian</span><span>Built with curiosity & HTML</span></footer>
 
-<!-- BACKGROUND CANVAS -->
+<!-- PHOTON CRYSTAL CANVAS -->
 <script>
-(() => {
-  const cv = document.getElementById('bgCanvas');
-  const c = cv.getContext('2d');
-  let W, H, t = 0, mx = 0.5, my = 0.5;
-  const S = 5;
+const cv = document.getElementById('bgCanvas');
+const ctx = cv.getContext('2d');
+const hero = document.querySelector('.hero');
+let W, H, t = 0;
 
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    cv.width = W * dpr; cv.height = H * dpr;
-    cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    c.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  document.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+function resize() {
+  const dpr = Math.min(window.devicePixelRatio, 2);
+  W = hero.offsetWidth; H = hero.offsetHeight;
+  cv.width = W*dpr; cv.height = H*dpr;
+  cv.style.width = W+'px'; cv.style.height = H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  placeCrystals();
+}
 
-  const srcs = [
-    { x: 0.2, y: 0.3, f: 0.028, a: 1.0, p: 0 },
-    { x: 0.8, y: 0.25, f: 0.032, a: 0.7, p: 2.1 },
-    { x: 0.5, y: 0.75, f: 0.024, a: 0.85, p: 4.2 },
-    { x: 0.35, y: 0.6, f: 0.036, a: 0.5, p: 1.4 },
+let crystals = [];
+function placeCrystals() {
+  crystals = [];
+  const layout = [
+    {rx:0.12,ry:0.40,type:'spdc',mat:'BBO',note:'β-BaB₂O₄'},
+    {rx:0.30,ry:0.20,type:'shg',mat:'KTP',note:'KTiOPO₄'},
+    {rx:0.30,ry:0.62,type:'shg',mat:'LiNbO₃',note:'PPLN'},
+    {rx:0.52,ry:0.38,type:'spdc',mat:'BiBO',note:'BiB₃O₆'},
+    {rx:0.52,ry:0.72,type:'spdc',mat:'KDP',note:'KH₂PO₄'},
+    {rx:0.72,ry:0.22,type:'shg',mat:'LiNbO₃',note:'PPLN'},
+    {rx:0.72,ry:0.55,type:'spdc',mat:'BBO',note:'β-BaB₂O₄'},
+    {rx:0.88,ry:0.40,type:'shg',mat:'KTP',note:'KTiOPO₄'},
+    {rx:0.20,ry:0.80,type:'spdc',mat:'PPKTP',note:'PP-KTiOPO₄'},
+    {rx:0.42,ry:0.15,type:'shg',mat:'BBO',note:'β-BaB₂O₄'},
+    {rx:0.62,ry:0.82,type:'spdc',mat:'LiNbO₃',note:'PPLN'},
+    {rx:0.82,ry:0.70,type:'shg',mat:'BiBO',note:'BiB₃O₆'},
+    {rx:0.05,ry:0.18,type:'spdc',mat:'KTP',note:'KTiOPO₄'},
   ];
+  layout.forEach(l => {
+    crystals.push({x:W*l.rx,y:H*l.ry,size:30,angle:(l.type==='shg'?0.1:-0.1)+(Math.random()-0.5)*0.08,type:l.type,mat:l.mat,note:l.note,glow:0,stored:[]});
+  });
+}
+window.addEventListener('resize', resize);
+resize();
 
-  function frame() {
-    t += 0.008;
-    srcs[2].x += (mx - srcs[2].x) * 0.008;
-    srcs[2].y += (my - srcs[2].y) * 0.008;
-    srcs[0].x = 0.2 + Math.sin(t * 0.4) * 0.08;
-    srcs[0].y = 0.3 + Math.cos(t * 0.3) * 0.06;
+let photons=[], vacPairs=[], entanglements=[], pIdCounter=0;
 
-    const cols = Math.ceil(W / S), rows = Math.ceil(H / S);
-    const img = c.createImageData(cols, rows);
-    const d = img.data;
+function findNearest(x,y,visited,minD) {
+  let best=null,bd=Infinity;
+  for(const cr of crystals){if(visited&&visited.has(cr))continue;const d=Math.sqrt((x-cr.x)**2+(y-cr.y)**2);if(d<bd&&d>(minD||15)){bd=d;best=cr;}}
+  return bd<600?best:null;
+}
 
-    for (let r = 0; r < rows; r++) {
-      for (let cl = 0; cl < cols; cl++) {
-        const px = (cl * S + S/2) / W, py = (r * S + S/2) / H;
-        let v = 0;
-        for (let i = 0; i < srcs.length; i++) {
-          const s = srcs[i];
-          const dx = (px - s.x) * (W/H), dy = py - s.y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          v += Math.sin(dist * s.f * W - t*2.5 + s.p) * s.a / (1 + dist*2.5);
-        }
-        v = Math.max(0, Math.min(1, (v + 1.5) / 3.0));
-        const idx = (r * cols + cl) * 4;
-        if (v > 0.58) {
-          const p = (v - 0.58) / 0.42;
-          d[idx] = Math.floor(50 + p*88); d[idx+1] = Math.floor(52 + p*80);
-          d[idx+2] = Math.floor(60 + p*72); d[idx+3] = Math.floor(30 + p*65);
-        } else if (v > 0.42) {
-          const p = (v - 0.42) / 0.16;
-          d[idx] = Math.floor(30 + p*8); d[idx+1] = Math.floor(28 + p*10);
-          d[idx+2] = Math.floor(36 + p*12); d[idx+3] = Math.floor(15 + p*15);
-        } else {
-          const p = v / 0.42;
-          d[idx] = Math.floor(20 + p*12); d[idx+1] = Math.floor(18 + p*10);
-          d[idx+2] = Math.floor(28 + p*10); d[idx+3] = Math.floor(8 + p*12);
-        }
-      }
+function freqToColor(f){if(f>1.8)return[110,45,185];if(f>1.3)return[55,75,175];if(f>0.9)return[45,145,115];if(f>0.6)return[175,95,35];return[185,55,45];}
+
+hero.addEventListener('click', e => {
+  const r=hero.getBoundingClientRect();
+  const cx=e.clientX-r.left,cy=e.clientY-r.top;
+  const tgt=findNearest(cx,cy,null,10);
+  if(!tgt)return;
+  const ang=Math.atan2(tgt.y-cy,tgt.x-cx);
+  const freq=0.8+Math.random()*0.3;
+  photons.push({id:pIdCounter++,x:cx,y:cy,vx:Math.cos(ang)*2.8,vy:Math.sin(ang)*2.8,freq,amp:7,phase:Math.random()*Math.PI*2,energy:freq,kx:Math.cos(ang)*freq,ky:Math.sin(ang)*freq,noise:0.35,noiseSeed:Math.random()*1000,noiseSign:1,color:freqToColor(freq),alpha:0.9,trail:[],target:tgt,alive:true,age:0,visited:new Set(),partnerId:null,isFromSHG:false});
+});
+
+function drawCrystal(cr){
+  ctx.save();ctx.translate(cr.x,cr.y);ctx.rotate(cr.angle);
+  const s=cr.size;
+  ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s*0.6,-s*0.3);ctx.lineTo(s*0.6,s*0.3);ctx.lineTo(0,s);ctx.lineTo(-s*0.6,s*0.3);ctx.lineTo(-s*0.6,-s*0.3);ctx.closePath();
+  const ga=0.06+cr.glow*0.2;const isSHG=cr.type==='shg';
+  const fc=isSHG?'85,125,155':'150,112,65';const sc=isSHG?'65,105,135':'130,92,50';
+  ctx.fillStyle='rgba('+fc+','+ga+')';ctx.strokeStyle='rgba('+sc+','+(0.22+cr.glow*0.5)+')';
+  ctx.lineWidth=1.4;ctx.fill();ctx.stroke();
+  if(cr.glow>0.05){ctx.beginPath();ctx.arc(0,0,s*2.5,0,Math.PI*2);ctx.fillStyle='rgba('+fc+','+cr.glow*0.06+')';ctx.fill();}
+  ctx.rotate(-cr.angle);
+  ctx.fillStyle='rgba(50,45,40,0.5)';ctx.font='500 14px monospace';ctx.textAlign='center';ctx.fillText(cr.mat,0,s+18);
+  ctx.fillStyle='rgba(80,75,65,0.35)';ctx.font='11px monospace';ctx.fillText(cr.type.toUpperCase(),0,s+32);
+  if(isSHG&&cr.stored.length>0){ctx.fillStyle='rgba(180,100,30,0.55)';ctx.font='500 12px monospace';ctx.fillText(cr.stored.length+'/2',0,-s-12);}
+  ctx.restore();
+}
+
+function noiseVal(seed,sign,age){return(Math.sin(age*47.3+seed)*0.6+Math.sin(age*91.7+seed*1.3)*0.3+Math.sin(age*23.1+seed*0.7)*0.1)*sign;}
+
+function spawnSHG(cr){
+  cr.glow=1;const p1=cr.stored[0],p2=cr.stored[1];cr.stored=[];
+  const outFreq=p1.energy+p2.energy,outKx=p1.kx+p2.kx,outKy=p1.ky+p2.ky;
+  const visited=new Set(p1.visited);p2.visited.forEach(v=>visited.add(v));visited.add(cr);
+  const outAngle=Math.atan2(outKy,outKx);
+  const outNoise=Math.sqrt(p1.noise**2+p2.noise**2+2*p1.noise*p2.noise*0.85);
+  const tgt=findNearest(cr.x+Math.cos(outAngle)*50,cr.y+Math.sin(outAngle)*50,visited,20);
+  const outId=pIdCounter++;
+  const combinedSeed=(p1.noiseSeed+p2.noiseSeed)*0.5;
+  photons.push({id:outId,x:cr.x,y:cr.y,vx:Math.cos(outAngle)*3,vy:Math.sin(outAngle)*3,freq:outFreq,amp:3.5,phase:0,energy:outFreq,kx:outKx,ky:outKy,noise:outNoise,noiseSeed:combinedSeed,noiseSign:1,color:freqToColor(outFreq),alpha:0.88,trail:[],target:tgt,alive:true,age:0,visited,partnerId:null,isFromSHG:true});
+  [p1,p2].forEach(pp=>{
+    if(pp.partnerId!=null){
+      entanglements.push({id1:outId,id2:pp.partnerId,age:0});
+    }
+  });
+  for(const ent of entanglements){
+    if(ent.id1===p1.id||ent.id1===p2.id) ent.id1=outId;
+    if(ent.id2===p1.id||ent.id2===p2.id) ent.id2=outId;
+  }
+}
+
+function spawnSPDC(cr,inP){
+  cr.glow=1;const visited=new Set(inP.visited);visited.add(cr);
+  const split=0.35+Math.random()*0.3,f1=inP.energy*split,f2=inP.energy*(1-split);
+  const inAngle=Math.atan2(inP.ky,inP.kx),inK=Math.sqrt(inP.kx**2+inP.ky**2);
+  const k1=f1,k2=f2;
+  const cosT=Math.max(-0.95,Math.min(0.95,(inK*inK+k1*k1-k2*k2)/(2*inK*k1)));
+  const theta1=Math.acos(cosT),a1=inAngle+theta1;
+  const a2=Math.atan2(inP.ky-k1*Math.sin(a1),inP.kx-k1*Math.cos(a1));
+  const pairNoise=Math.max(0.3,inP.noise*0.8);
+  const sharedSeed=inP.noiseSeed*0.7+Math.random()*300;
+  const id1=pIdCounter++,id2=pIdCounter++;
+  [[f1,a1,k1,id1,id2,1],[f2,a2,k2,id2,id1,-1]].forEach(([freq,angle,k,id,partner,sign])=>{
+    const tgt=findNearest(cr.x+Math.cos(angle)*60,cr.y+Math.sin(angle)*60,visited,20);
+    photons.push({id,x:cr.x,y:cr.y,vx:Math.cos(angle)*2.2,vy:Math.sin(angle)*2.2,freq,amp:5.5,phase:Math.random()*Math.PI,energy:freq,kx:k*Math.cos(angle),ky:k*Math.sin(angle),noise:pairNoise,noiseSeed:sharedSeed,noiseSign:sign,color:freqToColor(freq),alpha:0.8,trail:[],target:tgt,alive:true,age:0,visited:new Set(visited),partnerId:partner,isFromSHG:false});
+  });
+  entanglements.push({id1,id2,age:0});
+  if(inP.partnerId!=null){
+    entanglements.push({id1:id1,id2:inP.partnerId,age:0});
+    entanglements.push({id1:id2,id2:inP.partnerId,age:0});
+  }
+  for(const ent of entanglements){
+    if(ent.id1===inP.id&&ent.id2!==id1&&ent.id2!==id2){
+      const oldTarget=ent.id2;
+      ent.id1=id1;
+      entanglements.push({id1:id2,id2:oldTarget,age:ent.age});
+    }
+    if(ent.id2===inP.id&&ent.id1!==id1&&ent.id1!==id2){
+      const oldSource=ent.id1;
+      ent.id2=id1;
+      entanglements.push({id1:oldSource,id2:id2,age:ent.age});
+    }
+  }
+}
+
+function hitCrystal(cr,p){
+  if(cr.type==='shg'){cr.stored.push({energy:p.energy,kx:p.kx,ky:p.ky,visited:p.visited,noise:p.noise,partnerId:p.partnerId,noiseSeed:p.noiseSeed,noiseSign:p.noiseSign,id:p.id});cr.glow=0.5;if(cr.stored.length>=2)spawnSHG(cr);}
+  else{spawnSPDC(cr,p);}
+}
+
+function frame(){
+  t+=0.016;ctx.clearRect(0,0,W,H);
+
+  if(Math.random()<0.25)vacPairs.push({x:Math.random()*W,y:Math.random()*H,angle:Math.random()*Math.PI*2,maxSep:5+Math.random()*10,life:0.2+Math.random()*0.6,age:0});
+
+  for(let i=vacPairs.length-1;i>=0;i--){
+    const vp=vacPairs[i];vp.age+=0.016;const pr=vp.age/vp.life;
+    if(pr>=1){vacPairs.splice(i,1);continue;}
+    const sep=Math.sin(pr*Math.PI)*vp.maxSep,alpha=Math.sin(pr*Math.PI)*0.2;
+    const dx=Math.cos(vp.angle)*sep,dy=Math.sin(vp.angle)*sep;
+    ctx.beginPath();ctx.arc(vp.x+dx,vp.y+dy,1.5+vp.maxSep*0.06,0,Math.PI*2);ctx.fillStyle='rgba(200,70,50,'+alpha+')';ctx.fill();
+    ctx.beginPath();ctx.arc(vp.x-dx,vp.y-dy,1.5+vp.maxSep*0.06,0,Math.PI*2);ctx.fillStyle='rgba(40,100,180,'+alpha+')';ctx.fill();
+    ctx.beginPath();ctx.setLineDash([1.5,2.5]);ctx.moveTo(vp.x+dx,vp.y+dy);ctx.lineTo(vp.x-dx,vp.y-dy);ctx.strokeStyle='rgba(100,88,68,'+alpha*0.35+')';ctx.lineWidth=0.4;ctx.stroke();ctx.setLineDash([]);
+  }
+
+  for(const cr of crystals){cr.glow*=0.955;drawCrystal(cr);}
+
+  const pMap={};for(const p of photons)pMap[p.id]=p;
+
+  for(let i=entanglements.length-1;i>=0;i--){
+    const ent=entanglements[i];ent.age+=0.016;const pa=pMap[ent.id1],pb=pMap[ent.id2];
+    if(!pa||!pb||!pa.alive||!pb.alive||ent.age>14){entanglements.splice(i,1);continue;}
+    const dist=Math.sqrt((pa.x-pb.x)**2+(pa.y-pb.y)**2);
+    const alpha=Math.max(0,0.35*(1-ent.age*0.06)*Math.min(1,dist/40));
+    if(alpha<0.005)continue;
+    ctx.beginPath();ctx.setLineDash([3,5]);ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);ctx.strokeStyle='rgba(180,60,60,'+alpha+')';ctx.lineWidth=1.2;ctx.stroke();ctx.setLineDash([]);
+  }
+
+  for(let i=photons.length-1;i>=0;i--){
+    const p=photons[i];p.age+=0.016;p.x+=p.vx;p.y+=p.vy;
+    const speed=Math.sqrt(p.vx**2+p.vy**2),ppx=-p.vy/speed,ppy=p.vx/speed;
+    const nv=noiseVal(p.noiseSeed,p.noiseSign,p.age);
+    const noiseAmp=p.noise*p.amp*0.8*nv;
+    const osc=Math.sin(p.age*p.freq*24+p.phase)*p.amp+noiseAmp;
+    const dx=p.x+ppx*osc,dy=p.y+ppy*osc;
+    p.trail.push({x:dx,y:dy});if(p.trail.length>40)p.trail.shift();
+
+    let hit=false;
+    if(p.target&&!p.visited.has(p.target)){if(Math.sqrt((p.target.x-p.x)**2+(p.target.y-p.y)**2)<18){hitCrystal(p.target,p);hit=true;}}
+    if(!hit&&p.age>0.15){for(const cr of crystals){if(p.visited.has(cr))continue;if(Math.sqrt((cr.x-p.x)**2+(cr.y-p.y)**2)<18){hitCrystal(cr,p);hit=true;break;}}}
+    if(hit)p.alive=false;
+    if(p.x<-80||p.x>W+80||p.y<-80||p.y>H+80||p.age>15)p.alive=false;
+    p.alpha*=0.999;const[cr2,cg,cb]=p.color;
+
+    const envW=p.noise*p.amp*0.7;
+    if(p.trail.length>3&&envW>1){
+      ctx.beginPath();
+      for(let j=0;j<p.trail.length;j++){const tt=p.trail[j];const na=j<p.trail.length-1?Math.atan2(p.trail[j+1].y-tt.y,p.trail[j+1].x-tt.x):Math.atan2(p.vy,p.vx);if(j===0)ctx.moveTo(tt.x+Math.cos(na+Math.PI/2)*envW,tt.y+Math.sin(na+Math.PI/2)*envW);else ctx.lineTo(tt.x+Math.cos(na+Math.PI/2)*envW,tt.y+Math.sin(na+Math.PI/2)*envW);}
+      for(let j=p.trail.length-1;j>=0;j--){const tt=p.trail[j];const na=j<p.trail.length-1?Math.atan2(p.trail[Math.min(j+1,p.trail.length-1)].y-tt.y,p.trail[Math.min(j+1,p.trail.length-1)].x-tt.x):Math.atan2(p.vy,p.vx);ctx.lineTo(tt.x+Math.cos(na-Math.PI/2)*envW,tt.y+Math.sin(na-Math.PI/2)*envW);}
+      ctx.closePath();ctx.fillStyle='rgba('+cr2+','+cg+','+cb+','+(p.isFromSHG?p.alpha*0.06:p.alpha*0.035)+')';ctx.fill();
     }
 
-    const off = document.createElement('canvas');
-    off.width = cols; off.height = rows;
-    off.getContext('2d').putImageData(img, 0, 0);
-    c.clearRect(0, 0, W, H);
-    c.imageSmoothingEnabled = true;
-    c.imageSmoothingQuality = 'high';
-    c.drawImage(off, 0, 0, W, H);
-    requestAnimationFrame(frame);
+    if(p.trail.length>1){for(let j=1;j<p.trail.length;j++){const ta=(j/p.trail.length)*p.alpha*0.45;ctx.beginPath();ctx.moveTo(p.trail[j-1].x,p.trail[j-1].y);ctx.lineTo(p.trail[j].x,p.trail[j].y);ctx.strokeStyle='rgba('+cr2+','+cg+','+cb+','+ta+')';ctx.lineWidth=p.isFromSHG?2.0:1.5;ctx.stroke();}}
+    ctx.beginPath();ctx.arc(dx,dy,2.5,0,Math.PI*2);ctx.fillStyle='rgba('+cr2+','+cg+','+cb+','+p.alpha+')';ctx.fill();
+    ctx.beginPath();ctx.arc(dx,dy,5,0,Math.PI*2);ctx.fillStyle='rgba('+cr2+','+cg+','+cb+','+(p.alpha*0.12)+')';ctx.fill();
+    if(!p.alive){delete pMap[p.id];photons.splice(i,1);}
   }
-  frame();
-})();
+  requestAnimationFrame(frame);
+}
+frame();
 
+// Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
