@@ -94,6 +94,9 @@ regenerate, surgical edits only. Full design history in
 
 ## Recent changes
 
+- **2026-06-12** — Replaced hero tagline with the personal version ("This is
+  my corner of the internet…"), commit `225da56`. Verified all nav targets
+  and research card links resolve — no 404s remain.
 - **2026-06-12** — Restructured to per-page folders: subpages moved to
   `publications/`, `projects/`, `cv/`, `notes/` (old dark design kept,
   asset paths and nav links updated); shared assets moved to `assets/`;
