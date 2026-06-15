@@ -100,7 +100,7 @@ personal-site/                      (= git repo root)
 ├── .git/
 ├── .gitignore        tracked   — ignores _docs/, _reports/, *.bak, *.tmp
 ├── index.html        tracked   — home page: hero+canvas, about, research cards, notes, contact (533 lines)
-├── cv.pdf            (after cleanup rename of CV_Movsisian_Aleksandr.pdf) — CV download target
+├── cv.pdf            tracked   — CV download target (hero "CV ↓" button)
 ├── photo.jpg         tracked   — hero photo
 ├── PROJECT.md        tracked   — this file
 ├── README.md         tracked   — short: quick start + pointer here
@@ -109,9 +109,7 @@ personal-site/                      (= git repo root)
 ├── assets/
 │   ├── style.css     tracked   — OLD dark-theme stylesheet, used only by legacy subpages
 │   └── main.js       tracked   — scroll-reveal (IntersectionObserver), used by legacy subpages
-├── publications/     index.html (legacy) + NOTES.md     PENDING REMOVAL (nav link dropped 2026-06-16)
 ├── projects/         index.html (legacy) + NOTES.md     tracked
-├── cv/               index.html (legacy) + NOTES.md     PENDING REMOVAL (CV now a PDF download)
 ├── notes/            index.html (legacy, ex-blog) + NOTES.md  tracked
 ├── life/             index.html (warm-grey placeholder) + NOTES.md  tracked
 └── research/         index.html (warm-grey overview) + NOTES.md     tracked
@@ -129,10 +127,9 @@ content drafts) — Aleksandr's working notes, tracked by git.
 | Path | Purpose | Status | Design state |
 |---|---|---|---|
 | `/` (index.html) | Home: hero + canvas, about, research cards, contact | live | warm-grey |
-| `/publications/` | Papers & preprints list | pending removal | dark-theme; nav link dropped 2026-06-16 |
 | `/projects/` | Lab work & code | legacy | dark-theme, real project descriptions |
-| `/cv/` | Curriculum vitae | pending removal | dark-theme; CV now a PDF download (`cv.pdf`) |
 | `/notes/` | Notes & writing index | legacy | dark-theme, sample posts |
+| `cv.pdf` | CV download (hero button) | live | PDF file at root |
 | `/life/` | Life outside the lab | placeholder | warm-grey |
 | `/research/` | Research overview + links to 4 directions | placeholder | warm-grey |
 | `/research/quantum-noise/` | Quantum Noise & Optomechanics | placeholder | warm-grey |
@@ -199,43 +196,51 @@ removal). All internal links use absolute folder URLs (`/research/onn/`).
   Verified all nav and research-card targets resolve — no 404s.
 - **2026-06-12** — Upgraded PROJECT.md to this detailed master-document
   format; added `_reports/` (gitignored) for per-stage session reports.
-- **2026-06-16** — Home-page hero & nav edits (uncommitted as of writing):
-  name shortened to "Aleksandr" (surname/`.hl` span removed); hero reduced
-  to two buttons (More about me; CV ↓ → `cv.pdf` with `download`),
-  Publications button removed; nav trimmed to four items (Research,
-  Projects, Notes, Life); RQC node removed from the path row. Cross-checked
-  the site against the real CV (`CV_Movsisian_Aleksandr.pdf`). Cleanup to
-  delete `publications/` and `cv/` and rename the PDF to `cv.pdf` handed to
-  Aleksandr as commands — pending his run.
+- **2026-06-16** — `01963fa` Home-page hero & nav: name shortened to
+  "Aleksandr" (surname/`.hl` span removed); hero reduced to two buttons
+  (More about me; CV ↓ → `cv.pdf` with `download`), Publications button
+  removed; nav trimmed to four items (Research, Projects, Notes, Life);
+  RQC node removed from the path row. Cross-checked the site against the
+  real CV; renamed `CV_Movsisian_Aleksandr.pdf` → `cv.pdf`; deleted the
+  now-orphaned `publications/` and `cv/` folders.
+- **2026-06-16** — Home-page about section rewritten: two new bio
+  paragraphs (BSc+MSc at MSU; EPFL; a year at KAUST; now Research Assistant
+  in the Photonics Lab at ETH Zurich; plus a cross-fields/curiosity line);
+  old "Outside the lab…" paragraph removed (content moving to the Life
+  page); path row → `MSU → EPFL → KAUST → ETH Zurich`; quick links given
+  real URLs (Scholar, GitHub, LinkedIn with `target="_blank" rel="noopener"`;
+  Email `mailto:`).
 
 ## (h) Known issues / risks
 
 - **OneDrive:** repo inside a synced folder — risk of sync conflicts on
   `.git` and of files being dematerialized to cloud-only placeholders.
-- **Visual inconsistency:** the four legacy subpages (publications,
-  projects, cv, notes) still use the old dark theme and contain
-  "Aleksandr Lastname" placeholder footers — jarring next to the warm-grey
-  home page.
-- **Dead external links:** home page has `href="#"` stubs for Google
-  Scholar, GitHub, LinkedIn, Twitter/X, Telegram.
-- **Current position will go stale soon:** per the CV, the latest role is
-  ETH Zurich, Photonics Lab (Prof. Lukas Novotny), Jul 2026–present. The
-  site shows "KAUST · now" — accurate until ~Jul 2026, then outdated. ETH
-  is not mentioned anywhere yet. Kept as-is at Aleksandr's request for now.
+- **Visual inconsistency:** the two remaining legacy subpages (projects,
+  notes) still use the old dark theme and contain "Aleksandr Lastname"
+  placeholder footers — jarring next to the warm-grey home page.
+- **Dead external links:** the about-section quick links (Scholar, GitHub,
+  LinkedIn, Email) now have real URLs. Remaining `href="#"` stubs: the
+  contact section and the notes "find me elsewhere" row (Scholar, GitHub,
+  LinkedIn, Twitter/X, Telegram).
+- **Current position is slightly ahead of the CV:** the site now states
+  ETH Zurich (Photonics Lab) as the current role in both the bio and the
+  path row. The CV lists ETH as Jul 2026–present (Prof. Lukas Novotny), so
+  as of mid-June 2026 this is a near-future move stated as present —
+  Aleksandr's choice.
 - **Home-page content debt** (decisions in
-  `_docs/website-session-summary.md`): warmer "about" text (drafts exist,
-  await Aleksandr's approval); add "Biography" label and "Currently at"
-  line. (RQC path node removed 2026-06-16.)
+  `_docs/website-session-summary.md`): optional "Biography" label and
+  "Currently at" line not yet added. (Bio text rewritten and RQC path node
+  removed 2026-06-16.)
 - No favicon, no Open Graph meta tags, no sitemap.
 
 ## (i) Roadmap / TODO
 
-1. Redesign the four legacy subpages to the warm-grey design system.
-2. Fill real content: publications list, CV, project details, the four
-   research detail pages, life page.
-3. Add ETH Zurich (Prof. Novotny, from Jul 2026) as current position when
-   Aleksandr decides; warmer about text, "Currently at" line (needs his
-   input). (RQC node removed 2026-06-16.)
+1. Redesign the two legacy subpages (projects, notes) to the warm-grey
+   design system.
+2. Fill real content: project details, the four research detail pages,
+   life page.
+3. Optional home-page polish: "Biography" label, "Currently at" line.
+   (ETH Zurich now set as current position; bio rewritten 2026-06-16.)
 4. Replace `href="#"` external links with real URLs (Scholar, GitHub,
    LinkedIn, …). CV PDF now present (`cv.pdf` after the cleanup rename).
 5. Consider moving the repo out of OneDrive (e.g. `C:\code\`).
