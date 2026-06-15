@@ -218,10 +218,10 @@ removal). All internal links use absolute folder URLs (`/research/onn/`).
 - **Visual inconsistency:** the two remaining legacy subpages (projects,
   notes) still use the old dark theme and contain "Aleksandr Lastname"
   placeholder footers — jarring next to the warm-grey home page.
-- **Dead external links:** the about-section quick links (Scholar, GitHub,
-  LinkedIn, Email) now have real URLs. Remaining `href="#"` stubs: the
-  contact section and the notes "find me elsewhere" row (Scholar, GitHub,
-  LinkedIn, Twitter/X, Telegram).
+- **Dead external links:** Scholar, GitHub, LinkedIn, and Email now have
+  real URLs everywhere (about quick links, contact row, notes social row).
+  Remaining `href="#"` stubs: Twitter/X and Telegram (no URLs yet), plus
+  the three "Coming soon" note cards.
 - **Current position is slightly ahead of the CV:** the site now states
   ETH Zurich (Photonics Lab) as the current role in both the bio and the
   path row. The CV lists ETH as Jul 2026–present (Prof. Lukas Novotny), so
