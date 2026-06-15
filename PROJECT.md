@@ -166,7 +166,8 @@ flowchart TD
     RES --> NL
 ```
 
-Nav links: Research, Projects, Notes, Life. The hero "CV ↓" button
+Nav links (identical on every page): Main, Research, Projects, Notes, Life,
+with the `AM` logo linking home. The hero "CV ↓" button
 downloads `cv.pdf`. Home-page research cards link directly to the four
 research subpages. `/publications/` and `/cv/` are dropped (pending file
 removal). All internal links use absolute folder URLs (`/research/onn/`).
@@ -210,6 +211,17 @@ removal). All internal links use absolute folder URLs (`/research/onn/`).
   page); path row → `MSU → EPFL → KAUST → ETH Zurich`; quick links given
   real URLs (Scholar, GitHub, LinkedIn with `target="_blank" rel="noopener"`;
   Email `mailto:`).
+- **2026-06-16** — `0976342` Wired real Scholar/GitHub/LinkedIn URLs into
+  the contact section and the notes "find me elsewhere" row (Twitter/X and
+  Telegram still `#`, no URLs yet).
+- **2026-06-16** — Unified the nav bar across **all 9 pages** (home + life +
+  research overview + 4 research detail pages + projects + notes). One
+  canonical nav everywhere: `AM` logo → `/`, then links **Main · Research ·
+  Projects · Notes · Life** (all absolute folder URLs). Legacy pages'
+  "Aleksandr" logo → "AM"; removed the stale About/Publications/CV links
+  (the latter two were 404s after last session's deletions); dropped
+  per-page `active` highlight so the bar is byte-identical. Each page keeps
+  its own theme (dark legacy pages stay dark). Content/canvas untouched.
 
 ## (h) Known issues / risks
 
